@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: account-service
+
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/myebank?createDatabaseIfNotExist=true
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PWD:}
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
+    hibernate:
+      ddl-auto: update
+
+axon:
+  serializer:
+    general: jackson
+  event-handling:
+    processors:
+      name:
+        mode: subscribing
+  event-store:
+    snapshot:
+      trigger:
+        threshold: 5
+  axon-server:
+    enabled: false
+
+port: 8083
